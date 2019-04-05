@@ -31,7 +31,7 @@ namespace Receive.Shared.RabbitMqExamples
           int dots = message.Split('.').Length - 1;
           Thread.Sleep(dots * 1000);
 
-          Console.WriteLine($" [x] Done processing '{message}'");
+          Console.WriteLine($" [x] Done processing '{message}' in {dots} seconds.");
         };
 
         channel.BasicConsume(queue: queueName,
