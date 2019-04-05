@@ -26,12 +26,12 @@ namespace Receive.Shared.RabbitMqExamples
         {
           var body = ea.Body;
           var message = Encoding.UTF8.GetString(body);
-          Console.WriteLine(" [x] Received {0}", message);
+          Console.WriteLine($" [x] Received {message}");
 
           int dots = message.Split('.').Length - 1;
           Thread.Sleep(dots * 1000);
 
-          Console.WriteLine(" [x] Done");
+          Console.WriteLine($" [x] Done processing '{message}'");
         };
 
         channel.BasicConsume(queue: queueName,

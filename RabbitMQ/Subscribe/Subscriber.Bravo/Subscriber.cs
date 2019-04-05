@@ -1,11 +1,14 @@
-﻿using Receive.Shared.RabbitMqExamples;
+﻿using System;
+using Receive.Shared.RabbitMqExamples;
 
-namespace Receive
+namespace Subscriber.Bravo
 {
-  class Program
+  class Subscriber
   {
     static void Main(string[] args)
     {
+      Console.Title = "Subscriber.Bravo";
+
       IReceive receiver;
 
       //receiver = new HelloWorld();

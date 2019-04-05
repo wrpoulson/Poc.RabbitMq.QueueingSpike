@@ -10,7 +10,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Receive.Shared\Receive.Shared.csproj" />
+    <ProjectReference Include="..\Subscribe.Shared\Subscribe.Shared.csproj" />
   </ItemGroup>
 
 </Project>
