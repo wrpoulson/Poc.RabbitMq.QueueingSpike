@@ -1,29 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-
+﻿
 namespace Publisher.RabbitMqExamples
 {
-  public class WorkQueues : SendBase, ISend
+  public class WorkQueues : PublishBase, IPublish
   {
-    public void Start(string[] args, List<string> messages)
+    public WorkQueues()
     {
-      var queueName = "task_queue";
-
-      DispatchInitialMessages(queueName, args, messages);
-
-      while (true)
-      {
-        Console.WriteLine(" Enter a new message to queue or simply press enter to [exit].");
-        var userInput = Console.ReadLine();
-        if (!string.IsNullOrEmpty(userInput))
-        {
-          SendMessage(queueName, userInput);
-        }
-        else
-        {
-          break;
-        }
-      }
+      ExchangeName = string.Empty;
+      QueueName = "task_queue";
+      RoutingKey = "task_queue";
     }
   }
 }

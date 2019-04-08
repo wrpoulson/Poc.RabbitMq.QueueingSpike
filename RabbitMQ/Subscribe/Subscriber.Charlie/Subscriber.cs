@@ -1,5 +1,5 @@
 ﻿using System;
-using Receive.Shared.RabbitMqExamples;
+using Subscribe.Shared.RabbitMqExamples;
 
 namespace Subscriber.Charlie
 {
@@ -8,17 +8,7 @@ namespace Subscriber.Charlie
     static void Main(string[] args)
     {
       Console.Title = "Subscriber.Charlie";
-
-      IReceive receiver;
-
-      //receiver = new HelloWorld();
-      receiver = new WorkQueues();
-      //receiver = new PublishSubscribe();
-      //receiver = new Routing();
-      //receiver = new Topics();
-      //receiver = new Rpc();
-
-      receiver.Start(args);
+      new SharedSubscriber().Start(args);
     }
   }
 }

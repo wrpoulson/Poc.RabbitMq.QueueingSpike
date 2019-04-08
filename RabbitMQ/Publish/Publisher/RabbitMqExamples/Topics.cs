@@ -3,11 +3,13 @@ using System.Collections.Generic;
 
 namespace Publisher.RabbitMqExamples
 {
-  public class Topics : SendBase, ISend
+  public class Topics : PublishBase, IPublish
   {
-    public void Start(string[] args, List<string> messages)
+    public Topics()
     {
-      throw new NotImplementedException();
+      ExchangeName = string.Empty;
+      QueueName = string.Empty;
+      RoutingKey = string.Empty;
     }
   }
 }

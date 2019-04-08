@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 using Publisher.RabbitMqExamples;
 using RabbitMqExamples.Data;
 
@@ -10,16 +11,16 @@ namespace Publisher
     {
       Console.Title = "Publisher";
 
-      ISend sender;
+      IPublish publisher;
 
-      //sender = new HelloWorld();
-      sender = new WorkQueues();
-      //sender = new PublishSubscribe();
-      //sender = new Routing();
-      //sender = new Topics();
-      //sender = new Rpc();
+      //publisher = new HelloWorld();
+      //publisher = new WorkQueues();
+      publisher = new PublishSubscribe();
+      //publisher = new Routing();
+      //publisher = new Topics();
+      //publisher = new Rpc();
 
-      sender.Start(args, new Messages().RandomDefaultStartMessages());
+      publisher.Start(args, new Messages().RandomDefaultStartMessages());
     }
   }
 }

@@ -1,13 +1,34 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Text;
+using RabbitMQ.Client;
 
 namespace Publisher.RabbitMqExamples
 {
-  public class PublishSubscribe : SendBase, ISend
+  public class PublishSubscribe : PublishBase, IPublish
   {
-    public void Start(string[] args, List<string> messages)
+    public PublishSubscribe()
     {
-      throw new NotImplementedException();
+      ExchangeName = "logs";
+      QueueName = string.Empty;
+      RoutingKey = string.Empty;
+    }
+
+    public override void SendMessage(string message)
+    {
+      var factory = new ConnectionFactory() { HostName = "localhost" };
+      using (var connection = factory.CreateConnection())
+      using (var channel = connection.CreateModel())
+      {
+        channel.ExchangeDeclare(ExchangeName, "fanout");
+
+        var body = Encoding.UTF8.GetBytes(message);
+
+        channel.BasicPublish(exchange: ExchangeName,
+                             routingKey: RoutingKey,
+                             basicProperties: null,
+                             body: body);
+        Console.WriteLine(" [x] Sent {0}", message);
+      }
     }
   }
 }

@@ -4,18 +4,24 @@ using System.Threading;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 
-namespace Receive.Shared.RabbitMqExamples
+namespace Subscribe.Shared.RabbitMqExamples
 {
-  public class WorkQueues : IReceive
+  public class WorkQueues : SubscribeBase, ISubscribe
   {
+    public WorkQueues()
+    {
+      ExchangeName = string.Empty;
+      QueueName = "task_queue";
+      RoutingKey = string.Empty;
+    }
+
     public void Start(string[] args)
     {
-      var queueName = "task_queue";
       var factory = new ConnectionFactory() { HostName = "localhost" };
       using (var connection = factory.CreateConnection())
       using (var channel = connection.CreateModel())
       {
-        channel.QueueDeclare(queue: queueName,
+        channel.QueueDeclare(queue: QueueName,
                              durable: false,
                              exclusive: false,
                              autoDelete: false,
@@ -34,7 +40,7 @@ namespace Receive.Shared.RabbitMqExamples
           Console.WriteLine($" [x] Done processing '{message}' in {dots} seconds.");
         };
 
-        channel.BasicConsume(queue: queueName,
+        channel.BasicConsume(queue: QueueName,
                              autoAck: true,
                              consumer: consumer);
 
