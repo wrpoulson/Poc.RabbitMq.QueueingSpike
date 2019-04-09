@@ -23,9 +23,9 @@ namespace Subscribe.Shared.RabbitMqExamples
       {
         channel.ExchangeDeclare(ExchangeName, "fanout");
 
-        var queueName = channel.QueueDeclare().QueueName;
+        QueueName = channel.QueueDeclare().QueueName;
 
-        channel.QueueBind(queue: queueName,
+        channel.QueueBind(queue: QueueName,
                           exchange: ExchangeName,
                           routingKey: RoutingKey);
 
@@ -44,7 +44,7 @@ namespace Subscribe.Shared.RabbitMqExamples
           Console.WriteLine($" [x] Done processing '{message}' in {dots} seconds.");
         };
 
-        channel.BasicConsume(queue: queueName,
+        channel.BasicConsume(queue: QueueName,
                              autoAck: true,
                              consumer: consumer);
 
