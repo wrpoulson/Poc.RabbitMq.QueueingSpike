@@ -38,7 +38,7 @@ namespace Subscribe.Shared.RabbitMqExamples
           var message = Encoding.UTF8.GetString(body);
           Console.WriteLine($" [x] Received {message}");
 
-          int dots = message.Split('.').Length - 1;
+          int dots = message.Split('.').Length - 2;
           Thread.Sleep(dots * 1000);
 
           Console.WriteLine($" [x] Done processing '{message}' in {dots} seconds.");

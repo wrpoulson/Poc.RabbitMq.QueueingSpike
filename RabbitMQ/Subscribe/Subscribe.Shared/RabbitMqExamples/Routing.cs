@@ -1,5 +1,6 @@
 ﻿using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
+using Config = RabbitMqExamples.Configuration;
 using System;
 using System.Linq;
 using System.Text;
@@ -41,7 +42,7 @@ namespace Subscribe.Shared.RabbitMqExamples
 
           PrintReceivedMessage(message, RoutingKey);
 
-          int dots = message.Split('.').Length - 1;
+          int dots = message.Split('.').Length - 2;
           Thread.Sleep(dots * 1000);
 
           Console.WriteLine($" [x] Done processing '{message}' in {dots} seconds.");
@@ -58,24 +59,31 @@ namespace Subscribe.Shared.RabbitMqExamples
 
     private void PrintReceivedMessage(string message, string routingKey)
     {
+      string severity = string.Empty;
+
       Console.Write(" [x] Received ");
 
-      switch (routingKey)
+      if (routingKey == Config.Severity.INFO)
       {
-        case "info":
-          Console.ForegroundColor = ConsoleColor.Blue;
-          break;
-        case "warning":
-          Console.ForegroundColor = ConsoleColor.Yellow;
-          break;
-        case "critical":
-          Console.ForegroundColor = ConsoleColor.Red;
-          break;
-        default:
-          break;
+        Console.ForegroundColor = ConsoleColor.Blue;
+        severity = Config.Severity.INFO;
+      }
+      if (routingKey == Config.Severity.WARNING)
+      {
+        Console.ForegroundColor = ConsoleColor.Yellow;
+        severity = Config.Severity.WARNING;
+      }
+      if (routingKey == Config.Severity.CRITICAL)
+      {
+        Console.ForegroundColor = ConsoleColor.Red;
+        severity = Config.Severity.CRITICAL;
       }
 
-      Console.Write(routingKey.ToUpper());
+      if (!string.IsNullOrEmpty(severity))
+      {
+        Console.Write(severity.ToUpper());
+      }
+
       Console.ForegroundColor = ConsoleColor.Gray;
       Console.WriteLine($" {message}");
     }

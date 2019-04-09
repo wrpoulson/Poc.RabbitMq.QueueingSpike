@@ -1,4 +1,5 @@
 ﻿using RabbitMQ.Client;
+using Config = RabbitMqExamples.Configuration;
 using System;
 using System.Text;
 
@@ -43,13 +44,13 @@ namespace Publisher.RabbitMqExamples
       switch (randomness)
       {
         case 0:
-          return "info";
+          return Config.Severity.INFO;
         case 1:
-          return "warning";
+          return Config.Severity.WARNING;
         case 2:
-          return "critical";
+          return Config.Severity.CRITICAL;
         default:
-          return "unknown";
+          return Config.Severity.UNKNOWN;
       }
     }
 
@@ -59,13 +60,13 @@ namespace Publisher.RabbitMqExamples
 
       switch (severity)
       {
-        case "info":
+        case Config.Severity.INFO:
           Console.ForegroundColor = ConsoleColor.Blue;
           break;
-        case "warning":
+        case Config.Severity.WARNING:
           Console.ForegroundColor = ConsoleColor.Yellow;
           break;
-        case "critical":
+        case Config.Severity.CRITICAL:
           Console.ForegroundColor = ConsoleColor.Red;
           break;
         default:
@@ -74,7 +75,7 @@ namespace Publisher.RabbitMqExamples
 
       Console.Write(severity.ToUpper());
       Console.ForegroundColor = ConsoleColor.Gray;
-      Console.WriteLine($" message");
+      Console.WriteLine($" {message}");
     }
   }
 }

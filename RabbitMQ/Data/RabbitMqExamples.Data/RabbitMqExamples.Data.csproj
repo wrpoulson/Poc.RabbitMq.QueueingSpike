@@ -4,4 +4,8 @@
     <TargetFramework>netcoreapp2.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\RabbitMqExamples.Configuration\RabbitMqExamples.Configuration.csproj" />
+  </ItemGroup>
+
 </Project>

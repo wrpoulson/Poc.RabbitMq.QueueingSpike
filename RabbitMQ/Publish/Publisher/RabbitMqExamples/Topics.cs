@@ -1,4 +1,5 @@
 ﻿using RabbitMQ.Client;
+using Config = RabbitMqExamples.Configuration;
 using System;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -24,13 +25,12 @@ namespace Publisher.RabbitMqExamples
         channel.ExchangeDeclare(ExchangeName, "topic");
 
         var severity = GetSeverity();
-        var fileType = GetFileType(message);
-        var lCode = GetLCode(message);
+        var routingKey = $"{GetLCode(message)}.{GetFileType(message)}.{severity}";
 
         var body = Encoding.UTF8.GetBytes(message);
 
         channel.BasicPublish(exchange: ExchangeName,
-                             routingKey: $"{lCode}.{fileType}.{severity}",
+                             routingKey: routingKey,
                              basicProperties: null,
                              body: body);
 
@@ -40,25 +40,21 @@ namespace Publisher.RabbitMqExamples
 
     private object GetLCode(string message)
     {
-      Regex lCodeRegex = new Regex(@"^([Ll]([0-4]\d{2}))$");
+      Regex lCodeRegex = new Regex(@"([Ll]([0-4]\d{2}))");
       var matchResult = lCodeRegex.Match(message);
-      return matchResult.Success ? matchResult.Value : "unknown";
+      return matchResult.Success ? matchResult.Value : Config.Severity.UNKNOWN;
     }
 
     private object GetFileType(string message)
     {
-      string fileType837 = "837";
-      string fileType277 = "277";
-      string fileType271 = "271";
-
       if (message != null)
       {
-        if (message.Contains(fileType837)) return fileType837;
-        if (message.Contains(fileType277)) return fileType277;
-        if (message.Contains(fileType271)) return fileType271;
+        if (message.Contains(Config.FileType.Ansi271)) return Config.FileType.Ansi271;
+        if (message.Contains(Config.FileType.Ansi277)) return Config.FileType.Ansi277;
+        if (message.Contains(Config.FileType.Ansi837)) return Config.FileType.Ansi837;
       }
 
-      return "unknown";
+      return Config.FileType.UNKNOWN;
     }
 
     private string GetSeverity()
@@ -68,13 +64,13 @@ namespace Publisher.RabbitMqExamples
       switch (randomness)
       {
         case 0:
-          return "info";
+          return Config.Severity.INFO;
         case 1:
-          return "warning";
+          return Config.Severity.WARNING;
         case 2:
-          return "critical";
+          return Config.Severity.CRITICAL;
         default:
-          return "unknown";
+          return Config.Severity.UNKNOWN;
       }
     }
 
@@ -84,13 +80,13 @@ namespace Publisher.RabbitMqExamples
 
       switch (severity)
       {
-        case "info":
+        case Config.Severity.INFO:
           Console.ForegroundColor = ConsoleColor.Blue;
           break;
-        case "warning":
+        case Config.Severity.WARNING:
           Console.ForegroundColor = ConsoleColor.Yellow;
           break;
-        case "critical":
+        case Config.Severity.CRITICAL:
           Console.ForegroundColor = ConsoleColor.Red;
           break;
         default:
@@ -99,7 +95,7 @@ namespace Publisher.RabbitMqExamples
 
       Console.Write(severity.ToUpper());
       Console.ForegroundColor = ConsoleColor.Gray;
-      Console.WriteLine($" message");
+      Console.WriteLine($" {message}");
     }
   }
 }

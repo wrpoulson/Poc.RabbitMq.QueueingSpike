@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Threading;
-using RabbitMqExamples.Configuration;
+using Config = RabbitMqExamples.Configuration;
 using Subscribe.Shared.RabbitMqExamples;
 
 namespace Subscriber.Bravo
@@ -12,32 +12,33 @@ namespace Subscriber.Bravo
       Console.Title = "Subscriber.Bravo";
       ISubscribe subscriber;
 
-      switch (Examples.CURRENT_EXAMPLE)
+      switch (Config.Examples.CURRENT_EXAMPLE)
       {
-        case Examples.HELLO_WORLD:
+        case Config.Examples.HELLO_WORLD:
           subscriber = new HelloWorld();
           subscriber.Start(args);
           break;
-        case Examples.WORK_QUEUES:
+        case Config.Examples.WORK_QUEUES:
           Thread.Sleep(500);
           subscriber = new WorkQueues();
           subscriber.Start(args);
           break;
-        case Examples.PUBLISH_SUBSCRIBE:
+        case Config.Examples.PUBLISH_SUBSCRIBE:
           Thread.Sleep(500);
           subscriber = new PublishSubscribe();
           subscriber.Start(args);
           break;
-        case Examples.ROUTING:
+        case Config.Examples.ROUTING:
           Thread.Sleep(500);
           subscriber = new Routing();
-          subscriber.Start(new string[] { "warning" });
+          subscriber.Start(new string[] { Config.Severity.WARNING });
           break;
-        case Examples.TOPIC:
+        case Config.Examples.TOPIC:
+          Console.Title = Config.Topics.BRAVO_CONSOLE_TITLE;
           subscriber = new Topics();
-          subscriber.Start(args);
+          subscriber.Start(new string[] { Config.Topics.SEVERITY_ROUTING_KEY });
           break;
-        case Examples.RPC:
+        case Config.Examples.RPC:
           subscriber = new Rpc();
           subscriber.Start(args);
           break;
