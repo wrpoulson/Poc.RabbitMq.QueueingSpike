@@ -1,7 +1,7 @@
 ﻿using RabbitMQ.Client;
 using System;
-using System.Collections.Generic;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace Publisher.RabbitMqExamples
 {
@@ -40,12 +40,25 @@ namespace Publisher.RabbitMqExamples
 
     private object GetLCode(string message)
     {
-      throw new NotImplementedException();
+      Regex lCodeRegex = new Regex(@"^([Ll]([0-4]\d{2}))$");
+      var matchResult = lCodeRegex.Match(message);
+      return matchResult.Success ? matchResult.Value : "unknown";
     }
 
     private object GetFileType(string message)
     {
-      throw new NotImplementedException();
+      string fileType837 = "837";
+      string fileType277 = "277";
+      string fileType271 = "271";
+
+      if (message != null)
+      {
+        if (message.Contains(fileType837)) return fileType837;
+        if (message.Contains(fileType277)) return fileType277;
+        if (message.Contains(fileType271)) return fileType271;
+      }
+
+      return "unknown";
     }
 
     private string GetSeverity()

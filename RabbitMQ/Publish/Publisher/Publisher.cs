@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading;
 using Publisher.RabbitMqExamples;
+using RabbitMqExamples.Configuration;
 using RabbitMqExamples.Data;
 
 namespace Publisher
@@ -11,17 +12,37 @@ namespace Publisher
     {
       Console.Title = "Publisher";
       IPublish publisher;
-      bool delayStart = true;
 
-      //publisher = new HelloWorld();
-      //publisher = new WorkQueues();
-      //publisher = new PublishSubscribe();
-      publisher = new Routing();
-      //publisher = new Topics();
-      //publisher = new Rpc();
-
-      if (delayStart) Thread.Sleep(500);
-      publisher.Start(args, new Messages().RandomDefaultStartMessages());
+      switch (Examples.CURRENT_EXAMPLE)
+      {
+        case Examples.HELLO_WORLD:
+          publisher = new HelloWorld();
+          publisher.Start(args, new Messages().RandomDefaultStartMessages());
+          break;
+        case Examples.WORK_QUEUES:
+          Thread.Sleep(500);
+          publisher = new WorkQueues();
+          publisher.Start(args, new Messages().RandomDefaultStartMessages());
+          break;
+        case Examples.PUBLISH_SUBSCRIBE:
+          Thread.Sleep(500);
+          publisher = new PublishSubscribe();
+          publisher.Start(args, new Messages().RandomDefaultStartMessages());
+          break;
+        case Examples.ROUTING:
+          Thread.Sleep(500);
+          publisher = new Routing();
+          publisher.Start(args, new Messages().RandomDefaultStartMessages());
+          break;
+        case Examples.TOPIC:
+          publisher = new Topics();
+          publisher.Start(args, new Messages().RandomDefaultStartMessages(true));
+          break;
+        case Examples.RPC:
+          publisher = new Rpc();
+          publisher.Start(args, new Messages().RandomDefaultStartMessages());
+          break;
+      }
     }
   }
 }

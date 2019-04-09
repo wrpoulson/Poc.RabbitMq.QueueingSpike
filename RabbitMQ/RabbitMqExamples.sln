@@ -23,6 +23,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{71C737C6-5
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RabbitMqExamples.Data", "Data\RabbitMqExamples.Data\RabbitMqExamples.Data.csproj", "{F5A7FC1A-CF00-422D-BE72-9411E5B60A3F}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Configuration", "Configuration", "{8DE3AF55-A712-48E3-A600-441721B7A946}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RabbitMqExamples.Configuration", "RabbitMqExamples.Configuration\RabbitMqExamples.Configuration.csproj", "{E5075529-C494-4155-B846-2258FB8875FF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -53,6 +57,10 @@ Global
 		{F5A7FC1A-CF00-422D-BE72-9411E5B60A3F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F5A7FC1A-CF00-422D-BE72-9411E5B60A3F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F5A7FC1A-CF00-422D-BE72-9411E5B60A3F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E5075529-C494-4155-B846-2258FB8875FF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E5075529-C494-4155-B846-2258FB8875FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E5075529-C494-4155-B846-2258FB8875FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E5075529-C494-4155-B846-2258FB8875FF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -67,6 +75,8 @@ Global
 		{AA6D2E5F-6189-41FD-A2C9-D88735F043C0} = {1525E083-B2C9-4EE0-B1D5-4EDCD54C99C1}
 		{71C737C6-53AD-4853-9E10-25A48CA95230} = {B1E40AAB-47D9-4FB4-9765-40944C924364}
 		{F5A7FC1A-CF00-422D-BE72-9411E5B60A3F} = {71C737C6-53AD-4853-9E10-25A48CA95230}
+		{8DE3AF55-A712-48E3-A600-441721B7A946} = {B1E40AAB-47D9-4FB4-9765-40944C924364}
+		{E5075529-C494-4155-B846-2258FB8875FF} = {8DE3AF55-A712-48E3-A600-441721B7A946}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8E87358A-A263-4EFF-A089-79B70F76C384}
