@@ -22,7 +22,7 @@ namespace Subscribe.Shared.RabbitMqExamples
       using (var channel = connection.CreateModel())
       {
         channel.QueueDeclare(queue: QueueName,
-                             durable: false,
+                             durable: true,
                              exclusive: false,
                              autoDelete: false,
                              arguments: null);
