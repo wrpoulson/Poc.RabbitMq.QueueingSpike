@@ -3,7 +3,7 @@ namespace RabbitMqExamples.Configuration
 {
   public static class Examples
   {
-    public const string CURRENT_EXAMPLE = TOPIC;
+    public const string CURRENT_EXAMPLE = HELLO_WORLD;
     
     public const string HELLO_WORLD = "HELLO_WORLD"; // 1 publisher, 3 subscribers, round-robin
     public const string PUBLISH_SUBSCRIBE = "PUBLISH_SUBSCRIBE"; // 1 publisher, 3 subscribers, message fanout to 3 queues with 1 subscriber on each queue, all subscribers get each messages

@@ -11,7 +11,7 @@ namespace Subscribe.Shared.RabbitMqExamples
     public WorkQueues()
     {
       ExchangeName = string.Empty;
-      QueueName = "task_queue";
+      QueueName = "task_queue_durable";
       RoutingKey = string.Empty;
     }
 
